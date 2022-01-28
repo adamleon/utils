@@ -1,13 +1,13 @@
 import os
 
-class TreeNode:
+class TreeNode(object):
     num_spaces = 4
     branch_symbol = "--[ "
     leaf_symbol = "-- "
 
-    def __init__(self, name, branches = [], parent = None):
+    def __init__(self, name, parent = None):
         self.name = name
-        self.branches = branches
+        self.branches = []
         self.parent = parent
         if(not self.isRoot()):
             parent.branches.append(self)
@@ -40,25 +40,11 @@ print("Hello World")
 folderA = TreeNode("folderA")
 folderB = TreeNode("folderB")
 
-print("just folders")
-for branch in folderB.branches:
-    print(branch.name)
-
-print("add node")
-
 folderA.addNode(folderB)
+fileA = TreeNode("fileA", folderA)
+fileB = TreeNode("fileB", folderA)
+fileC = TreeNode("fileC", folderA)
+fileD = TreeNode("fileD", folderB)
+fileE = TreeNode("fileE", folderB)
 
-for branch in folderB.branches:
-    print(branch.name)
-    
-print("files")
-
-fileA = TreeNode("fileA",[], folderA)
-fileB = TreeNode("fileB",[], folderA)
-fileC = TreeNode("fileC",[], folderA)
-fileD = TreeNode("fileD",[], folderB)
-fileE = TreeNode("fileE",[], folderB)
-
-print(fileE.parent.name)
-for branch in folderB.branches:
-    print(branch.name)
+folderA.print()
