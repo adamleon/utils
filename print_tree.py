@@ -23,3 +23,4 @@ print_folder(folderA, filesA)
 
 for root, dirs, files in os.walk(os.getcwd()):
     print_folder(root, files)
+    print("\n")
