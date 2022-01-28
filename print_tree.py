@@ -32,6 +32,7 @@ class TreeNode(object):
         else:
             print(indent + self.branch_symbol + self.name)
 
+            self.branches.sort(key=lambda x: x.isLeaf())
             for branch in self.branches:
                 branch.print(level + 1)
 
@@ -40,9 +41,9 @@ print("Hello World")
 folderA = TreeNode("folderA")
 folderB = TreeNode("folderB")
 
-folderA.addNode(folderB)
-fileA = TreeNode("fileA", folderA)
 fileB = TreeNode("fileB", folderA)
+fileA = TreeNode("fileA", folderA)
+folderA.addNode(folderB)
 fileC = TreeNode("fileC", folderA)
 fileD = TreeNode("fileD", folderB)
 fileE = TreeNode("fileE", folderB)
