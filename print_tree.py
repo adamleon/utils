@@ -1,26 +1,64 @@
 import os
 
+class TreeNode:
+    num_spaces = 4
+    branch_symbol = "--[ "
+    leaf_symbol = "-- "
+
+    def __init__(self, name, branches = [], parent = None):
+        self.name = name
+        self.branches = branches
+        self.parent = parent
+        if(not self.isRoot()):
+            parent.branches.append(self)
+
+    def isLeaf(self):
+        return len(self.branches) == 0
+
+    def isRoot(self):
+        return self.parent == None
+
+    def addNode(self, node):
+        self.branches.append(node)
+        node.parent = self
+
+    def print(self, level = 0):
+        indent = level * (self.num_spaces * ' ')
+        if(level > 0):
+            indent = indent[:-1] + '|'
+        
+        if(self.isLeaf()):
+            print(indent + self.leaf_symbol + self.name)
+        else:
+            print(indent + self.branch_symbol + self.name)
+
+            for branch in self.branches:
+                branch.print(level + 1)
+
 print("Hello World")
 
-num_spaces = 4
-folder_symbol = "--[ "
-file_symbol = "-- "
+folderA = TreeNode("folderA")
+folderB = TreeNode("folderB")
 
-def print_folder(folder, files, level = 0):
-    indent = level * (num_spaces * ' ')
-    print(indent + folder_symbol + folder)
-    indent = indent + ((num_spaces - 1) * ' ') + '|'
+print("just folders")
+for branch in folderB.branches:
+    print(branch.name)
 
-    for file in files:
-        print(indent + file_symbol + file)
+print("add node")
 
+folderA.addNode(folderB)
 
-folderA = "test_folder"
-subfoldersA = ["folder_A", "folder_B" , "folder_C", "folder_D"]
-filesA = ["file_A.py", "file_B.py", "file_C.py"]
+for branch in folderB.branches:
+    print(branch.name)
+    
+print("files")
 
-print_folder(folderA, filesA)
+fileA = TreeNode("fileA",[], folderA)
+fileB = TreeNode("fileB",[], folderA)
+fileC = TreeNode("fileC",[], folderA)
+fileD = TreeNode("fileD",[], folderB)
+fileE = TreeNode("fileE",[], folderB)
 
-for root, dirs, files in os.walk(os.getcwd()):
-    print_folder(root, files)
-    print("\n")
+print(fileE.parent.name)
+for branch in folderB.branches:
+    print(branch.name)
