@@ -49,3 +49,13 @@ fileD = TreeNode("fileD", folderB)
 fileE = TreeNode("fileE", folderB)
 
 folderA.print()
+
+root_dir = TreeNode("utils")
+current_dir = root_dir
+for root, dirs, files in os.walk(os.getcwd()):
+    for dir in dirs:
+        current_dir.addNode(TreeNode(dir))
+    for file in files:
+        current_dir.addNode(TreeNode(file))
+
+root_dir.print()
