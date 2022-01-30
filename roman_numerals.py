@@ -1,14 +1,14 @@
-def int_to_roman(number: int) -> str:
+def toroman(number: int) -> str:
     """
     Takes an integer number, returns a string with the roman numeral.
         Parameters:
-            number (int): A positive integer less than 5000
+            number (int): A positive integer less than 4000
         Returns:
             numeral (str): The roman numeral of the number.
     """
     # Exception handling
     if(number <= 0): raise ValueError("Number is less than 1")
-    if(number >= 5000): raise ValueError("Number is greater than 4999")
+    if(number >= 4000): raise ValueError("Number is greater than 3999")
     
     # Start of algorithm
     # The algorithm starts with a long string of I's
@@ -36,4 +36,4 @@ def int_to_roman(number: int) -> str:
     
     return numeral
 
-print(int_to_roman(4999))
+print(toroman(3999))
